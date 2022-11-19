@@ -1,0 +1,20 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+    <li [ngbNavItem]=1>
+        <a ngbNavLink>Create</a>
+    </li>
+
+    <li [ngbNavItem]=2>
+        <a ngbNavLink>Read</a>
+    </li>
+
+    <li [ngbNavItem]=3>
+        <a ngbNavLink>Update</a>
+    </li>
+
+    <li [ngbNavItem]=4>
+        <a ngbNavLink>Delete</a>
+    </li>
+
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
