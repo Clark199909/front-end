@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CourseSection } from './add-section';
+import { CourseSection } from '../services/course-section';
 import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class AddSectionService {
+export class SectionService {
 
     constructor(private http: HttpClient) {
     }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AddSectionService } from './add-section.service';
-import { CourseSection } from './add-section';
+import { SectionService } from 'src/app/models/section.service';
+import { CourseSection } from 'src/app/services/course-section';
 
 @Component({
     selector: 'app-add-section',
@@ -22,9 +22,9 @@ export class AddSectionComponent implements OnInit {
     professor: string;
     classroom: string;
     section_type: string;
-    addSectionService: AddSectionService;
+    sectionService: SectionService;
 
-    constructor(addSectionService: AddSectionService) {
+    constructor(sectionService: SectionService) {
         this.toggleSection = false;
         this.year = 2022;
         this.semester = "Fall";
@@ -36,7 +36,7 @@ export class AddSectionComponent implements OnInit {
         this.professor = "";
         this.classroom = "";
         this.section_type = "CVN";
-        this.addSectionService = addSectionService;
+        this.sectionService = sectionService;
     }
 
     ngOnInit(): void {
@@ -61,7 +61,7 @@ export class AddSectionComponent implements OnInit {
             classroom: this.classroom,
             section_type: this.section_type
         };
-        this.addSectionService.addSection(courseSection)
+        this.sectionService.addSection(courseSection)
             .subscribe(data => {
                 console.log(data)
             })
