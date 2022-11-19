@@ -1,6 +1,9 @@
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
     <li [ngbNavItem]=1>
         <a ngbNavLink>Create</a>
+        <ng-template ngbNavContent>
+            <app-add-section></app-add-section>
+        </ng-template>
     </li>
 
     <li [ngbNavItem]=2>

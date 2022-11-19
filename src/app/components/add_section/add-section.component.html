@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="width: 60rem">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col">
+                            <h3>Add a New Section</h3>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-link collapsed float-end" data-toggle="collapse"
+                                data-target="#collapse-L1" aria-expanded="true" aria-controls="collapse1"
+                                (click)="toggleCard('artist')">expand
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="toggleSection">
+                    <label>Year: </label><input type="number" class="form-control" [(ngModel)]="year">
+                    <p></p>
+                    <label>Semester: </label>
+                    <select class="form-control" [(ngModel)]="semester">
+                        <option value="Fall">Fall</option>
+                        <option value="Spring">Spring</option>
+                    </select>
+                    <p></p>
+                    <label>Days: </label>
+                    <select class="form-control" [(ngModel)]="day">
+                        <option value="M">M</option>
+                        <option value="T">T</option>
+                        <option value="W">W</option>
+                        <option value="R">R</option>
+                        <option value="F">F</option>
+                        <option value="MW">MW</option>
+                        <option value="TR">TR</option>
+                        <option value="MWF">MWF</option>
+                    </select>
+                    <p></p>
+                    <label>Start hour: </label><input type="number" class="form-control" [(ngModel)]="start_hr">
+                    <p></p>
+                    <label>Start minute: </label><input type="number" class="form-control" [(ngModel)]="start_min">
+                    <p></p>
+                    <label>End hour: </label><input type="number" class="form-control" [(ngModel)]="end_hr">
+                    <p></p>
+                    <label>End minute: </label><input type="number" class="form-control" [(ngModel)]="end_min">
+                    <p></p>
+                    <label>Professor: </label><input type="text" class="form-control" [(ngModel)]="professor">
+                    <p></p>
+                    <label>Classroom: </label><input type="text" class="form-control" [(ngModel)]="classroom">
+                    <p></p>
+                    <label>Section Type: </label>
+                    <select class="form-control" [(ngModel)]="section_type">
+                        <option value="CVN">CVN</option>
+                        <option value="in_person">In-Person</option>
+                    </select>
+                    <p></p>
+                    <button type="button" (click)="addSection()" class="btn btn-primary">Add</button>
+                    <!-- You typed: <span *ngIf="artistName"> "{{ artistName }}" </span> -->
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
