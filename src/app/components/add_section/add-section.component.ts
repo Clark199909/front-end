@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { SectionService } from 'src/app/models/section.service';
-import { CourseSection } from 'src/app/services/course-section';
+import { SectionService } from 'src/app/services/section.service';
+import { CourseSection } from 'src/app/models/course-section';
 
 @Component({
     selector: 'app-add-section',
