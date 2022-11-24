@@ -1,13 +1,24 @@
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
     <li [ngbNavItem]=1>
+        <a ngbNavLink>Home</a>
+    </li>
+    <li [ngbNavItem]=2>
         <a ngbNavLink>Add to Course</a>
         <ng-template ngbNavContent>
             <app-add-section></app-add-section>
         </ng-template>
     </li>
 
-    <li [ngbNavItem]=2>
+    <li [ngbNavItem]=3>
         <a ngbNavLink>View the Course</a>
+    </li>
+
+    <li [ngbNavItem]=4>
+        <a ngbNavLink>View Students' Info</a>
+    </li>
+
+    <li [ngbNavItem]=5>
+        <a ngbNavLink>View Students' Contacts</a>
     </li>
 
 </ul>
