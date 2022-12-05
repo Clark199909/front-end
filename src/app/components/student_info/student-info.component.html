@@ -1,0 +1,49 @@
+<div class="example-container mat-elevation-z8">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="uni">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> UNI </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.uni}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}}% </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nationality">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nationality </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.nationality}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ethnicity">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Ethnicity </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.ethnicity}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="gender">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.gender}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="admission_date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Admission Date </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.admission_date}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="manipulations">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-button color="warn">Delete</button>
+                <button mat-button color="primary">Edit</button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

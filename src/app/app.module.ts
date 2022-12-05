@@ -9,24 +9,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddSectionComponent } from './components/add_section/add-section.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { StudentInfoComponent } from './components/student_info/student-info.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     NavbarComponent,
     AddSectionComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    StudentInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,9 @@ import { SignupComponent } from './components/signup/signup.component';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     ReactiveFormsModule
   ],
   providers: [],
