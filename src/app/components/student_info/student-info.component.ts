@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table'
 
 import { StudentInfo } from 'src/app/models/student-info';
+import { Filter } from 'src/app/models/filter';
 import { StudentInfoService } from 'src/app/services/student-info.service';
 
 @Component({
@@ -17,6 +17,7 @@ export class StudentInfoComponent implements OnInit {
     displayedColumns = ['uni', 'name', 'nationality', 'ethnicity', 'gender', 'admission_date', 'manipulations'];
     dataSource!: MatTableDataSource<StudentInfo>;
     studentInfoService: StudentInfoService;
+    searchOption: string;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -24,28 +25,42 @@ export class StudentInfoComponent implements OnInit {
     constructor(studentInfoService: StudentInfoService) {
 
         this.studentInfoService = studentInfoService;
+        this.searchOption = this.displayedColumns[0];
 
     }
 
     ngOnInit(): void {
     }
 
-    /**
-   * Set the paginator and sort after the view init since this component will
-   * be able to query its view for the initialized paginator and sort.
-   */
     async ngAfterViewInit(): Promise<void> {
         const students = await this.studentInfoService.getStudents();
 
         this.dataSource = new MatTableDataSource(students);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.dataSource.filterPredicate = (data: StudentInfo, filtersJson: string) => {
+            const matchFilter: Boolean[] = [];
+            const filters: Filter[] = JSON.parse(filtersJson);
+
+            filters.forEach(filter => {
+                let val = data[filter.id as keyof StudentInfo] === null ? '' : data[filter.id as keyof StudentInfo];
+                matchFilter.push(val.toLowerCase().includes(filter.value.toLowerCase()));
+            });
+            return matchFilter.every(Boolean);
+        };
     }
 
-    applyFilter(filterValue: string) {
-        filterValue = filterValue.trim(); // Remove whitespace
-        filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-        this.dataSource.filter = filterValue;
+    applyFilter(event: Event) {
+        let filterValue = (event.target as HTMLInputElement).value
+        filterValue = filterValue.trim();
+        filterValue = filterValue.toLowerCase();
+
+        const tableFilters: Filter[] = [];
+        tableFilters.push({
+            id: this.searchOption,
+            value: filterValue
+        });
+        this.dataSource.filter = JSON.stringify(tableFilters);
     }
 
 }

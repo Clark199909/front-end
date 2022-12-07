@@ -15,7 +15,7 @@
 
 </div>
 
-<div class="student-table-container">
+<div class="contact-table-container">
 
     <mat-table [dataSource]="dataSource" matSort>
 
@@ -29,30 +29,25 @@
             <mat-cell *matCellDef="let row"> {{row.name}}% </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="nationality">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Nationality </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.nationality}} </mat-cell>
+        <ng-container matColumnDef="type">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.type}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="ethnicity">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Ethnicity </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.ethnicity}} </mat-cell>
+        <ng-container matColumnDef="note">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Note </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.note}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="gender">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.gender}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="admission_date">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Admission Date </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.admission_date}} </mat-cell>
+        <ng-container matColumnDef="content">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Content </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.content}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="manipulations">
             <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
             <mat-cell *matCellDef="let row">
-                <button mat-button color="warn">Delete</button>
+                <button mat-button color="warn" (click)="deleteContact(row.uni, row.type, row.note)">Delete</button>
                 <button mat-button color="primary">Edit</button>
             </mat-cell>
         </ng-container>

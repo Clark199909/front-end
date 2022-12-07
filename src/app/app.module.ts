@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { AddSectionComponent } from './components/add_section/add-section.compon
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { StudentInfoComponent } from './components/student_info/student-info.component';
+import { StudentContactsComponent } from './components/students-contacts/student-contacts.component';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { StudentInfoComponent } from './components/student_info/student-info.com
     AddSectionComponent,
     LoginComponent,
     SignupComponent,
-    StudentInfoComponent
+    StudentInfoComponent,
+    StudentContactsComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { StudentInfoComponent } from './components/student_info/student-info.com
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSelectModule,
     ReactiveFormsModule
   ],
   providers: [],
