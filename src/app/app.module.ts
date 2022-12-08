@@ -22,6 +22,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { StudentInfoComponent } from './components/student_info/student-info.component';
 import { StudentContactsComponent } from './components/students-contacts/student-contacts.component';
+import { AddContactComponent } from './components/students-contacts/add-contact.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { StudentContactsComponent } from './components/students-contacts/student
     LoginComponent,
     SignupComponent,
     StudentInfoComponent,
-    StudentContactsComponent
+    StudentContactsComponent,
+    AddContactComponent
   ],
   imports: [
     BrowserModule,

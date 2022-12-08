@@ -1,0 +1,104 @@
+<mat-card>
+    <mat-card-content>
+        <div class="header">
+            <h2>Add Contact</h2>
+        </div>
+        <form (ngSubmit)="onAdd()" name="addContactForm" [formGroup]="addContactForm">
+            <div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>UNI</mat-label>
+                    <input formControlName="uni" matInput required />
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type">
+                        <mat-option *ngFor="let t of types" [value]="t">
+                            {{t}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div *ngIf="addContactForm.get('type')?.value == 'phone'">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <mat-select formControlName="phone_description">
+                        <mat-option *ngFor="let d of phone_desc" [value]="d">
+                            {{d}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div *ngIf="addContactForm.get('type')?.value == 'phone'">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Country Code</mat-label>
+                    <input type="number" formControlName="country_code" matInput required />
+                </mat-form-field>
+            </div>
+            <div *ngIf="addContactForm.get('type')?.value == 'phone'">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Phone Nnumber</mat-label>
+                    <input type="number" formControlName="phone_no" matInput required />
+                </mat-form-field>
+            </div>
+            <div *ngIf="addContactForm.get('type')?.value == 'address'">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <mat-select formControlName="address_description">
+                        <mat-option *ngFor="let d of address_desc" [value]="d">
+                            {{d}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div *ngIf="addContactForm.get('type')?.value == 'address'">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Country</mat-label>
+                    <input formControlName="country" matInput required />
+                </mat-form-field>
+            </div>
+            <div *ngIf="addContactForm.get('type')?.value == 'address'">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>State</mat-label>
+                    <input formControlName="state" matInput required />
+                </mat-form-field>
+            </div>
+            <div *ngIf="addContactForm.get('type')?.value == 'address'">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input formControlName="city" matInput required />
+                </mat-form-field>
+            </div>
+            <div *ngIf="addContactForm.get('type')?.value == 'address'">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Zip Code</mat-label>
+                    <input type="number" formControlName="zip_code" matInput required />
+                </mat-form-field>
+            </div>
+            <div *ngIf="addContactForm.get('type')?.value == 'address'">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Street</mat-label>
+                    <input formControlName="street" matInput required />
+                </mat-form-field>
+            </div>
+            <div *ngIf="addContactForm.get('type')?.value == 'email'">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <mat-select formControlName="email_description">
+                        <mat-option *ngFor="let d of email_desc" [value]="d">
+                            {{d}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div *ngIf="addContactForm.get('type')?.value == 'email'">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Address</mat-label>
+                    <input formControlName="address" matInput required />
+                </mat-form-field>
+            </div>
+            <button mat-flat-button color="primary">Submit</button>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -11,12 +11,16 @@
 
 .search-bar {
     font-size: 14px;
-    width: 75%;
+    width: 60%;
 }
 
 .filter-option {
     font-size: 14px;
     width: 20%;
+    margin-left: 5%;
+}
+
+.add-contact-button {
     margin-left: 5%;
 }
 

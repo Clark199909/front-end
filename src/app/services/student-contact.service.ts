@@ -21,7 +21,13 @@ export class StudentContactService {
         return res;
     }
 
-    deleteContact(uni: string, type: string, note: string) {
+    addContact(uni: string, type: string, body: string): Observable<any> {
+        const headers = { 'content-type': 'application/json' }
+        const url = `https://127.0.0.1:5011/api/contacts/${uni}/add/${type}`;
+        return this.http.post(url, body, { 'headers': headers, withCredentials: true });
+    }
+
+    deleteContact(uni: string, type: string, note: string): Observable<any> {
         const url = `https://127.0.0.1:5011/api/contacts/${uni}/del/${type}/${note}`;
         return this.http.delete<any>(url, { withCredentials: true });
     }
