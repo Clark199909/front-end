@@ -72,7 +72,6 @@ export class AddContactComponent implements OnInit {
             })
         }
 
-        console.log(body)
         this.studentContactService.addContact(uni, type, body)
             .subscribe(data => {
                 alert(data);

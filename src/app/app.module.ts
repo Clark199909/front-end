@@ -23,6 +23,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { StudentInfoComponent } from './components/student_info/student-info.component';
 import { StudentContactsComponent } from './components/students-contacts/student-contacts.component';
 import { AddContactComponent } from './components/students-contacts/add-contact.component';
+import { EditContactComponent } from './components/students-contacts/edit-contact.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AddContactComponent } from './components/students-contacts/add-contact.
     SignupComponent,
     StudentInfoComponent,
     StudentContactsComponent,
-    AddContactComponent
+    AddContactComponent,
+    EditContactComponent
   ],
   imports: [
     BrowserModule,
