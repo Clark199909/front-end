@@ -1,10 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, Validators, FormControl } from "@angular/forms";
+import { FormGroup, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { StudentContactService } from "src/app/services/student-contact.service";
-import { StudentPhone } from "src/app/models/student-phone";
-import { StudentAddress } from "src/app/models/student-address";
-import { StudentEmail } from "src/app/models/student-email";
 
 @Component({
     selector: 'app-add-contact-component',
