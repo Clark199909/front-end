@@ -1,4 +1,4 @@
-export class Filter {
-    id!: string;
-    value!: string;
+export interface Filter {
+    id: string;
+    value: string;
 }
