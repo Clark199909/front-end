@@ -47,32 +47,9 @@ export class AddContactComponent implements OnInit {
     }
 
     onAdd() {
-        let body = "";
-        let uni: string = this.addContactForm.value.uni;
-        let type: string = this.addContactForm.value.type;
-        if (type === 'phone') {
-            body = JSON.stringify({
-                description: this.addContactForm.value.phone_description,
-                country_code: this.addContactForm.value.country_code.toString(),
-                phone_no: this.addContactForm.value.phone_no.toString()
-            })
-        } else if (type === 'address') {
-            body = JSON.stringify({
-                description: this.addContactForm.value.address_description,
-                country: this.addContactForm.value.country,
-                state: this.addContactForm.value.state,
-                city: this.addContactForm.value.city,
-                zip_code: this.addContactForm.value.zip_code.toString(),
-                street: this.addContactForm.value.street
-            })
-        } else {
-            body = JSON.stringify({
-                description: this.addContactForm.value.email_description,
-                address: this.addContactForm.value.address
-            })
-        }
+        const data = this.studentContactService.parseFormBody(this.addContactForm);
 
-        this.studentContactService.addContact(uni, type, body)
+        this.studentContactService.addContact(data.uni, data.type, data.body)
             .subscribe(data => {
                 alert(data);
                 this.router.navigate(['']);

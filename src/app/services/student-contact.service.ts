@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StudentContact } from '../models/student-contact';
 import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'
@@ -38,7 +39,36 @@ export class StudentContactService {
         return this.http.delete<any>(url, { withCredentials: true });
     }
 
-    parseFormBody() {
+    parseFormBody(formGroup: FormGroup) {
+        let body = "";
+        let uni: string = formGroup.value.uni;
+        let type: string = formGroup.value.type;
+        if (type === 'phone') {
+            body = JSON.stringify({
+                description: formGroup.value.phone_description,
+                country_code: formGroup.value.country_code.toString(),
+                phone_no: formGroup.value.phone_no.toString()
+            })
+        } else if (type === 'address') {
+            body = JSON.stringify({
+                description: formGroup.value.address_description,
+                country: formGroup.value.country,
+                state: formGroup.value.state,
+                city: formGroup.value.city,
+                zip_code: formGroup.value.zip_code.toString(),
+                street: formGroup.value.street
+            })
+        } else {
+            body = JSON.stringify({
+                description: formGroup.value.email_description,
+                address: formGroup.value.address
+            })
+        }
 
+        return {
+            uni: uni,
+            type: type,
+            body: body
+        }
     }
 }

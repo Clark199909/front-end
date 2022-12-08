@@ -10,17 +10,11 @@ import { StudentContactService } from 'src/app/services/student-contact.service'
 })
 export class EditContactComponent {
 
-    // @Input()
-    // customTitle!: string;
     editContactForm!: FormGroup;
     phone_desc: string[] = ['home', 'mobile', 'work'];
     address_desc: string[] = ['home', 'campus', 'work'];
     email_desc: string[] = ['personal', 'education', 'work'];
     studentContactService: StudentContactService;
-    // uni!: string;
-    // type!: string;
-    // description!: string;
-    // content!: string;
 
     constructor(private router: Router, studentContactService: StudentContactService) {
         this.studentContactService = studentContactService;
@@ -97,32 +91,9 @@ export class EditContactComponent {
     }
 
     onEdit() {
-        let body = "";
-        let uni: string = this.editContactForm.value.uni;
-        let type: string = this.editContactForm.value.type;
-        if (type === 'phone') {
-            body = JSON.stringify({
-                description: this.editContactForm.value.phone_description,
-                country_code: this.editContactForm.value.country_code.toString(),
-                phone_no: this.editContactForm.value.phone_no.toString()
-            })
-        } else if (type === 'address') {
-            body = JSON.stringify({
-                description: this.editContactForm.value.address_description,
-                country: this.editContactForm.value.country,
-                state: this.editContactForm.value.state,
-                city: this.editContactForm.value.city,
-                zip_code: this.editContactForm.value.zip_code.toString(),
-                street: this.editContactForm.value.street
-            })
-        } else {
-            body = JSON.stringify({
-                description: this.editContactForm.value.email_description,
-                address: this.editContactForm.value.address
-            })
-        }
+        const data = this.studentContactService.parseFormBody(this.editContactForm);
 
-        this.studentContactService.editContact(uni, type, body)
+        this.studentContactService.editContact(data.uni, data.type, data.body)
             .subscribe(data => {
                 alert(data);
                 this.router.navigate(['']);
