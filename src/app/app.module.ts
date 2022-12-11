@@ -14,29 +14,29 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddSectionComponent } from './components/sections/add-section.component';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { AddSectionComponent } from './components/add_section/add-section.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
 import { StudentInfoComponent } from './components/student_info/student-info.component';
 import { StudentContactsComponent } from './components/students-contacts/student-contacts.component';
 import { AddContactComponent } from './components/students-contacts/add-contact.component';
 import { EditContactComponent } from './components/students-contacts/edit-contact.component';
+import { SectionsComponent } from './components/sections/sections.component';
+import { EditSectionComponent } from './components/sections/edit-section.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    AddSectionComponent,
-    LoginComponent,
-    SignupComponent,
     StudentInfoComponent,
     StudentContactsComponent,
     AddContactComponent,
-    EditContactComponent
+    EditContactComponent,
+    SectionsComponent,
+    AddSectionComponent,
+    EditSectionComponent
   ],
   imports: [
     BrowserModule,

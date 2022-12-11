@@ -2,15 +2,12 @@
     <li [ngbNavItem]=1>
         <a ngbNavLink>Home</a>
     </li>
-    <li [ngbNavItem]=2>
-        <a ngbNavLink>Add to Course</a>
-        <ng-template ngbNavContent>
-            <app-add-section></app-add-section>
-        </ng-template>
-    </li>
 
     <li [ngbNavItem]=3>
         <a ngbNavLink>View the Course</a>
+        <ng-template ngbNavContent>
+            <app-sections></app-sections>
+        </ng-template>
     </li>
 
     <li [ngbNavItem]=4>
