@@ -24,6 +24,9 @@ import { AddContactComponent } from './components/students-contacts/add-contact.
 import { EditContactComponent } from './components/students-contacts/edit-contact.component';
 import { SectionsComponent } from './components/sections/sections.component';
 import { EditSectionComponent } from './components/sections/edit-section.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { AddProjectComponent } from './components/projects/add-project.component';
+import { EditProjectComponent } from './components/projects/edit-project.component';
 
 
 @NgModule({
@@ -36,7 +39,10 @@ import { EditSectionComponent } from './components/sections/edit-section.compone
     EditContactComponent,
     SectionsComponent,
     AddSectionComponent,
-    EditSectionComponent
+    EditSectionComponent,
+    ProjectsComponent,
+    AddProjectComponent,
+    EditProjectComponent
   ],
   imports: [
     BrowserModule,

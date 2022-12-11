@@ -3,10 +3,17 @@
         <a ngbNavLink>Home</a>
     </li>
 
-    <li [ngbNavItem]=3>
+    <li [ngbNavItem]=2>
         <a ngbNavLink>View the Course</a>
         <ng-template ngbNavContent>
             <app-sections></app-sections>
+        </ng-template>
+    </li>
+
+    <li [ngbNavItem]=3>
+        <a ngbNavLink>View Projects</a>
+        <ng-template ngbNavContent>
+            <app-projects></app-projects>
         </ng-template>
     </li>
 

@@ -1,0 +1,30 @@
+.contact-table-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.search-bar-container {
+    min-height: 64px;
+    padding: 8px 24px 0;
+}
+
+.search-bar {
+    font-size: 14px;
+    width: 60%;
+}
+
+.filter-option {
+    font-size: 14px;
+    width: 20%;
+    margin-left: 5%;
+}
+
+.add-project-button {
+    margin-left: 5%;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 500px;
+}

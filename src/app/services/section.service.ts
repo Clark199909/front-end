@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CourseSection } from '../models/course-section';
+import { HttpClient } from '@angular/common/http';
 import { Section } from '../models/section';
 import { Observable } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+
 
 @Injectable({
     providedIn: 'root'
