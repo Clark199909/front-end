@@ -71,8 +71,8 @@ export class SectionsComponent implements OnInit {
     }
 
     deleteSection(call_no: number) {
-        this.sectionService.deleteSection(call_no).subscribe(() => {
-            alert('Delete successful');
+        this.sectionService.deleteSection(call_no).subscribe(data => {
+            alert(data);
             this.ngAfterViewInit();
         });
     }

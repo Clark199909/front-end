@@ -14,7 +14,7 @@ import { StudentInfoService } from 'src/app/services/student-info.service';
 })
 
 export class StudentInfoComponent implements OnInit {
-    displayedColumns = ['uni', 'name', 'nationality', 'ethnicity', 'gender', 'admission_date', 'manipulations'];
+    displayedColumns = ['uni', 'name', 'nationality', 'race', 'gender', 'admission_date', 'section_period', 'project_name', 'team_name', 'manipulations'];
     dataSource!: MatTableDataSource<StudentInfo>;
     studentInfoService: StudentInfoService;
     searchOption: string;
@@ -44,6 +44,9 @@ export class StudentInfoComponent implements OnInit {
 
             filters.forEach(filter => {
                 let val = data[filter.id as keyof StudentInfo] === null ? '' : data[filter.id as keyof StudentInfo];
+                if (typeof val === "number") {
+                    val = val.toString();
+                }
                 matchFilter.push(val.toLowerCase().includes(filter.value.toLowerCase()));
             });
             return matchFilter.every(Boolean);
@@ -61,6 +64,13 @@ export class StudentInfoComponent implements OnInit {
             value: filterValue
         });
         this.dataSource.filter = JSON.stringify(tableFilters);
+    }
+
+    deleteStudent(call_no: number, uni: string): void {
+        this.studentInfoService.deleteStudent(call_no, uni).subscribe(data => {
+            alert(data);
+            this.ngAfterViewInit();
+        });
     }
 
 }

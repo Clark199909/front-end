@@ -13,6 +13,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddSectionComponent } from './components/sections/add-section.component';
 
@@ -27,6 +29,7 @@ import { EditSectionComponent } from './components/sections/edit-section.compone
 import { ProjectsComponent } from './components/projects/projects.component';
 import { AddProjectComponent } from './components/projects/add-project.component';
 import { EditProjectComponent } from './components/projects/edit-project.component';
+import { AddStudentComponent } from './components/student_info/add-student-info.component';
 
 
 @NgModule({
@@ -42,7 +45,8 @@ import { EditProjectComponent } from './components/projects/edit-project.compone
     EditSectionComponent,
     ProjectsComponent,
     AddProjectComponent,
-    EditProjectComponent
+    EditProjectComponent,
+    AddStudentComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,8 @@ import { EditProjectComponent } from './components/projects/edit-project.compone
     MatPaginatorModule,
     MatSortModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ReactiveFormsModule
   ],
   providers: [],

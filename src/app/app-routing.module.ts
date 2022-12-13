@@ -7,6 +7,7 @@ import { AddSectionComponent } from './components/sections/add-section.component
 import { EditSectionComponent } from './components/sections/edit-section.component';
 import { AddProjectComponent } from './components/projects/add-project.component';
 import { EditProjectComponent } from './components/projects/edit-project.component';
+import { AddStudentComponent } from './components/student_info/add-student-info.component';
 
 const routes: Routes = [
   { path: '', component: NavbarComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'add-section', component: AddSectionComponent },
   { path: 'edit-section', component: EditSectionComponent },
   { path: 'add-project', component: AddProjectComponent },
-  { path: 'edit-project', component: EditProjectComponent }
+  { path: 'edit-project', component: EditProjectComponent },
+  { path: 'add-student', component: AddStudentComponent }
 ];
 
 @NgModule({

@@ -12,6 +12,7 @@
         </mat-select>
     </mat-form-field>
 
+    <button class="add-student-button" routerLink="./add-student" mat-button color="accent">Add Student</button>
 
 </div>
 
@@ -34,9 +35,9 @@
             <mat-cell *matCellDef="let row"> {{row.nationality}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="ethnicity">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Ethnicity </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.ethnicity}} </mat-cell>
+        <ng-container matColumnDef="race">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Race </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.race}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="gender">
@@ -49,10 +50,25 @@
             <mat-cell *matCellDef="let row"> {{row.admission_date}} </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="section_period">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Section Period </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.section_period}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="project_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Project Name </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.project_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="team_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Team Name </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.team_name}} </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="manipulations">
             <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
             <mat-cell *matCellDef="let row">
-                <button mat-button color="warn">Delete</button>
+                <button mat-button color="warn" (click)="deleteStudent(row.call_no, row.uni)">Delete</button>
                 <button mat-button color="primary">Edit</button>
             </mat-cell>
         </ng-container>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StudentInfo } from '../models/student-info';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -18,5 +19,16 @@ export class StudentInfoService {
             return students
         }
         return res;
+    }
+
+    deleteStudent(call_no: number, uni: string): Observable<any> {
+        const url = `https://127.0.0.1:5011/api/students/delete/${call_no}/${uni}`;
+        return this.http.delete<any>(url, { withCredentials: true });
+    }
+
+    addStudent(body: string): Observable<any> {
+        const headers = { 'content-type': 'application/json' }
+        const url = `https://127.0.0.1:5011/api/students/add`
+        return this.http.post(url, body, { 'headers': headers })
     }
 }

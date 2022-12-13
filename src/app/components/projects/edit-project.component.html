@@ -3,7 +3,7 @@
         <div class="header">
             <h2>Edit Project</h2>
         </div>
-        <form (ngSubmit)="onEdit()" name="editProjectForm" [formGroup]="editProjectForm">
+        <form (ngSubmit)="onEdit()" name="editProjectForm" *ngIf="editProjectForm" [formGroup]="editProjectForm">
             <div>
                 <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Project Name</mat-label>
