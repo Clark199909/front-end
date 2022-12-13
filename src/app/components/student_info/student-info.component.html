@@ -69,7 +69,8 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
             <mat-cell *matCellDef="let row">
                 <button mat-button color="warn" (click)="deleteStudent(row.call_no, row.uni)">Delete</button>
-                <button mat-button color="primary">Edit</button>
+                <button mat-button color="primary" routerLink="./edit-student"
+                    [state]="{ uni:row.uni, name:row.name, nationality:row.nationality, race:row.race, gender:row.gender, admission_date:row.admission_date, call_no:row.call_no, project_id:row.project_id}">Edit</button>
             </mat-cell>
         </ng-container>
 

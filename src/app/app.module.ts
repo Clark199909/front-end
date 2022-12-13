@@ -30,6 +30,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { AddProjectComponent } from './components/projects/add-project.component';
 import { EditProjectComponent } from './components/projects/edit-project.component';
 import { AddStudentComponent } from './components/student_info/add-student-info.component';
+import { EditStudentComponent } from './components/student_info/edit-student-info.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { AddStudentComponent } from './components/student_info/add-student-info.
     ProjectsComponent,
     AddProjectComponent,
     EditProjectComponent,
-    AddStudentComponent
+    AddStudentComponent,
+    EditStudentComponent
   ],
   imports: [
     BrowserModule,

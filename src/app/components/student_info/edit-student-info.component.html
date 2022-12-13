@@ -1,0 +1,61 @@
+<mat-card>
+    <mat-card-content>
+        <div class="header">
+            <h2>Edit Student</h2>
+        </div>
+        <form (ngSubmit)="onEdit()" name="editStudentForm" *ngIf="editStudentForm" [formGroup]="editStudentForm">
+            <div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input formControlName="first_name" matInput required />
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input formControlName="last_name" matInput required />
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Nationality</mat-label>
+                    <mat-select formControlName="nationality">
+                        <mat-option *ngFor="let n of country_names" [value]="n">
+                            {{n}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Race</mat-label>
+                    <mat-select formControlName="race">
+                        <mat-option *ngFor="let r of races" [value]="r">
+                            {{r}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="gender">
+                        <mat-option *ngFor="let g of genders" [value]="g">
+                            {{g}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="admission_date">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <button mat-flat-button color="primary">Submit</button>
+        </form>
+    </mat-card-content>
+</mat-card>

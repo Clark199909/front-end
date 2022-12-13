@@ -31,4 +31,10 @@ export class StudentInfoService {
         const url = `https://127.0.0.1:5011/api/students/add`
         return this.http.post(url, body, { 'headers': headers })
     }
+
+    editContact(uni: string, body: string): Observable<any> {
+        const headers = { 'content-type': 'application/json' }
+        const url = `https://127.0.0.1:5011/api/students/update/${uni}`;
+        return this.http.put(url, body, { 'headers': headers, withCredentials: true });
+    }
 }

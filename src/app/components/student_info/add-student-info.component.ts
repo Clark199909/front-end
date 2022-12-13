@@ -71,7 +71,7 @@ export class AddStudentComponent implements OnInit {
                 nationality: new FormControl(this.country_names.length === 0 ? '' : this.country_names[0]),
                 race: new FormControl(this.races[0]),
                 gender: new FormControl(this.genders[0]),
-                admission_date: new FormControl(''),
+                admission_date: new FormControl(new Date()),
                 call_no: new FormControl(this.sections[0].call_no),
                 project_id: new FormControl('')
             }
@@ -87,7 +87,7 @@ export class AddStudentComponent implements OnInit {
             nationality: this.addStudentForm.value.nationality,
             race: this.addStudentForm.value.race,
             gender: this.addStudentForm.value.gender,
-            admission_date: JSON.stringify(this.addStudentForm.value.admission_date).substring(1, 10).replace(/\-/g, '/'),
+            admission_date: this.addStudentForm.value.admission_date.toLocaleDateString("en-US"),
             call_no: this.addStudentForm.value.call_no,
             project_id: null,
         });

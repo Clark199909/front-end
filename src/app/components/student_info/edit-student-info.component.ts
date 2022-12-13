@@ -15,7 +15,7 @@ import { SectionService } from "src/app/services/section.service";
 
 export class EditStudentComponent implements OnInit {
 
-    addStudentForm!: FormGroup;
+    editStudentForm!: FormGroup;
     studentInfoService: StudentInfoService;
     countryService: CountryService;
     sectionService: SectionService;
@@ -63,15 +63,17 @@ export class EditStudentComponent implements OnInit {
         }
         this.sections = await this.sectionService.getSections();
 
-        this.addStudentForm = new FormGroup(
+        const name_arr = history.state.name.split(',');
+
+        this.editStudentForm = new FormGroup(
             {
                 uni: new FormControl(history.state.uni),
-                first_name: new FormControl(history.state.first_name),
-                last_name: new FormControl(history.state.last_name),
+                first_name: new FormControl(name_arr[0]),
+                last_name: new FormControl(name_arr[1]),
                 nationality: new FormControl(history.state.nationality),
                 race: new FormControl(history.state.race),
                 gender: new FormControl(history.state.gender),
-                admission_date: new FormControl(history.state.admission_date),
+                admission_date: new FormControl(new Date(history.state.admission_date)),
                 call_no: new FormControl(history.state.call_no),
                 project_id: new FormControl(history.state.project_id)
             }
@@ -79,18 +81,23 @@ export class EditStudentComponent implements OnInit {
         );
     }
 
-    onAdd() {
+    onEdit() {
+        let uni = this.editStudentForm.value.uni;
         let data = JSON.stringify({
-            uni: this.addStudentForm.value.uni,
-            first_name: this.addStudentForm.value.first_name,
-            last_name: this.addStudentForm.value.last_name,
-            nationality: this.addStudentForm.value.nationality,
-            race: this.addStudentForm.value.race,
-            gender: this.addStudentForm.value.gender,
-            admission_date: JSON.stringify(this.addStudentForm.value.admission_date).substring(1, 10),
-            call_no: this.addStudentForm.value.call_no,
-            project_id: this.addStudentForm.value.project_id,
+            first_name: this.editStudentForm.value.first_name,
+            last_name: this.editStudentForm.value.last_name,
+            nationality: this.editStudentForm.value.nationality,
+            race: this.editStudentForm.value.race,
+            gender: this.editStudentForm.value.gender,
+            admission_date: this.editStudentForm.value.admission_date.toLocaleDateString("en-US"),
+            call_no: this.editStudentForm.value.call_no,
+            project_id: this.editStudentForm.value.project_id,
         });
 
+        this.studentInfoService.editContact(uni, data)
+            .subscribe(data => {
+                alert(data);
+                this.router.navigate(['']);
+            })
     }
 }
