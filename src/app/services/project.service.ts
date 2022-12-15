@@ -22,8 +22,8 @@ export class ProjectService {
         return res;
     }
 
-    deleteProject(project_id: number): Observable<any> {
-        const url = `https://127.0.0.1:5011/api/courses/projects/${project_id}`;
+    deleteProject(call_no: number, project_id: number): Observable<any> {
+        const url = `https://127.0.0.1:5011/api/courses/${call_no}/projects/${project_id}`;
         return this.http.delete<any>(url, { withCredentials: true });
     }
 

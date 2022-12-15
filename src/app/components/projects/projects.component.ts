@@ -69,8 +69,8 @@ export class ProjectsComponent implements OnInit {
         this.dataSource.filter = JSON.stringify(tableFilters);
     }
 
-    deleteProject(project_id: number) {
-        this.projectService.deleteProject(project_id).subscribe(data => {
+    deleteProject(call_no: number, project_id: number) {
+        this.projectService.deleteProject(call_no, project_id).subscribe(data => {
             alert(data);
             this.ngAfterViewInit();
         });
