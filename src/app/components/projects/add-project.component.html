@@ -27,6 +27,41 @@
                     <input formControlName="team_name" matInput required />
                 </mat-form-field>
             </div>
+            <div formArrayName="team_members" *ngFor="let item of teamMemberFormGroups.controls; let i = index;">
+                <ng-container *ngIf="i === 0">
+                    <mat-form-field class="full-width" appearance="outline" [formGroupName]="i">
+                        <mat-label>Team Member {{i + 1}}</mat-label>
+                        <mat-select formControlName="uni">
+                            <ng-container *ngFor="let s of students | keyvalue">
+                                <mat-option
+                                    *ngIf="teamMemberFormGroups.controls[i].get('uni')?.value == s.key || !selected_students.has(s.key)"
+                                    [value]="s.key">
+                                    {{s.key}} ({{s.value}})
+                                </mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
+                <ng-container *ngIf="i != 0">
+                    <mat-form-field class="shorter-width" appearance="outline" [formGroupName]="i">
+                        <mat-label>Team Member {{i + 1}}</mat-label>
+                        <mat-select formControlName="uni">
+                            <ng-container *ngFor="let s of students | keyvalue">
+                                <mat-option
+                                    *ngIf="teamMemberFormGroups.controls[i].get('uni')?.value == s.key || !selected_students.has(s.key)"
+                                    [value]="s.key">
+                                    {{s.key}} ({{s.value}})
+                                </mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                    <button class="delete-team-member-button" color="warn" mat-button
+                        (click)="deleteTeamMember(i)">Delete</button>
+                </ng-container>
+            </div>
+            <div class="add-team-member-button">
+                <a mat-button color="primary" (click)="addTeamMember()">Add Team Member</a>
+            </div>
             <button mat-flat-button color="primary">Submit</button>
         </form>
     </mat-card-content>

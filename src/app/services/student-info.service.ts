@@ -21,6 +21,16 @@ export class StudentInfoService {
         return res;
     }
 
+    async getStudentsWithNoProject(call_no: number): Promise<{ [key: string]: string }> {
+        const url = `https://127.0.0.1:5011/api/courses/${call_no}/students/no_project`;
+        const res = await this.http.get<{ [key: string]: string }>(url, { withCredentials: true }).toPromise();
+        if (res === undefined) {
+            const student_names: { [key: string]: string } = {};
+            return student_names
+        }
+        return res;
+    }
+
     deleteStudent(call_no: number, uni: string): Observable<any> {
         const url = `https://127.0.0.1:5011/api/students/delete/${call_no}/${uni}`;
         return this.http.delete<any>(url, { withCredentials: true });

@@ -11,3 +11,16 @@ mat-card {
 .full-width {
     width: 80%;
 }
+
+.add-team-member-button {
+    margin-bottom: 1em;
+}
+
+.shorter-width {
+    width: 65%;
+    margin-right: 4%;
+}
+
+.delete-team-member-button {
+    width: 10%;
+}
