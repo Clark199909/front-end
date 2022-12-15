@@ -36,44 +36,94 @@ export class AddProjectComponent implements OnInit {
 
     async ngOnInit(): Promise<void> {
         this.sections = await this.sectionService.getSections();
-        this.students = await this.studentInfoService.getStudentsWithNoProject(this.sections[0].call_no);
-        let new_team_member = new FormGroup({
-            uni: new FormControl(Object.keys(this.students)[0])
-        });
+        if (this.sections.length == 0) {
+            alert("No Section is available!");
+            this.router.navigate(['']);
+        }
+        this.students = await this.studentInfoService.getAvailableStudents(this.sections[0].call_no, 0);
+
+        let team_members = new FormArray([]);
+        if (Object.keys(this.students).length != 0) {
+            let new_team_member = new FormGroup({
+                uni: new FormControl(Object.keys(this.students)[0])
+            });
+
+            team_members.push(new_team_member);
+            this.selected_students.add(Object.keys(this.students)[0]);
+            new_team_member.valueChanges.pipe(
+                startWith(new_team_member.value),
+                pairwise()
+            ).subscribe(
+                ([old, value]) => {
+                    this.selected_students.delete(old['uni']);
+                    this.selected_students.add(value['uni']);
+                }
+            )
+        }
+
         this.addProjectForm = new FormGroup(
             {
                 call_no: new FormControl(this.sections[0].call_no),
                 project_name: new FormControl(''),
                 team_name: new FormControl(''),
-                team_members: new FormArray([new_team_member])
+                team_members: team_members
             }
         );
 
-        new_team_member.valueChanges.pipe(
-            startWith(new_team_member.value),
-            pairwise()
-        ).subscribe(
-            ([old, value]) => {
-                this.selected_students.delete(old['uni']);
-                this.selected_students.add(value['uni']);
+        this.addProjectForm.controls['call_no'].valueChanges.subscribe(async value => {
+            this.students = await this.studentInfoService.getAvailableStudents(value, 0);
+
+
+            while (this.teamMemberFormGroups.length !== 0) {
+                this.teamMemberFormGroups.removeAt(0);
             }
-        )
+            this.selected_students = new Set();
+            if (Object.keys(this.students).length != 0) {
+                let team_member = new FormGroup({
+                    uni: new FormControl(Object.keys(this.students)[0])
+                });
+                this.teamMemberFormGroups.push(team_member);
+
+                this.selected_students.add(Object.keys(this.students)[0]);
+                team_member.valueChanges.pipe(
+                    startWith(team_member.value),
+                    pairwise()
+                ).subscribe(
+                    ([old, value]) => {
+                        this.selected_students.delete(old['uni']);
+                        this.selected_students.add(value['uni']);
+                    }
+                )
+            }
+
+        });
     }
 
     onAdd() {
 
-        let call_no = this.addProjectForm.value.call_no
+        const call_no = this.addProjectForm.value.call_no;
+        const project_members = Array.from(this.selected_students);
 
-        let data = JSON.stringify({
-            project_name: this.addProjectForm.value.project_name,
-            team_name: this.addProjectForm.value.team_name
-        });
 
-        this.projectService.addProject(call_no, data)
-            .subscribe(data => {
-                alert(data);
-                this.router.navigate(['']);
-            })
+
+        if (project_members.length == 0) {
+            alert("Need at least one member!");
+        } else if (this.addProjectForm.value.project_name.trim() == ''
+            || this.addProjectForm.value.team_name.trim() == '') {
+            alert("Cannot have empty fields!");
+        } else {
+            let data = JSON.stringify({
+                project_name: this.addProjectForm.value.project_name,
+                team_name: this.addProjectForm.value.team_name,
+                project_members: project_members
+            });
+            this.projectService.addProject(call_no, data)
+                .subscribe(data => {
+                    alert(data);
+                    this.router.navigate(['']);
+                })
+        }
+
     }
 
     get teamMemberFormGroups() {

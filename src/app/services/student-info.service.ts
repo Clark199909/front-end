@@ -21,8 +21,8 @@ export class StudentInfoService {
         return res;
     }
 
-    async getStudentsWithNoProject(call_no: number): Promise<{ [key: string]: string }> {
-        const url = `https://127.0.0.1:5011/api/courses/${call_no}/students/no_project`;
+    async getAvailableStudents(call_no: number, project_id: number): Promise<{ [key: string]: string }> {
+        const url = `https://127.0.0.1:5011/api/courses/${call_no}/projects/${project_id}/available_students`;
         const res = await this.http.get<{ [key: string]: string }>(url, { withCredentials: true }).toPromise();
         if (res === undefined) {
             const student_names: { [key: string]: string } = {};

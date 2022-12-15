@@ -33,9 +33,9 @@ export class ProjectService {
         return this.http.post(url, body, { 'headers': headers })
     }
 
-    editProject(project_id: number, body: string): Observable<any> {
+    editProject(call_no: number, project_id: number, body: string): Observable<any> {
         const headers = { 'content-type': 'application/json' }
-        const url = `https://127.0.0.1:5011/api/courses/projects/${project_id}`;
+        const url = `https://127.0.0.1:5011/api/courses/${call_no}/projects/${project_id}`;
         return this.http.put(url, body, { 'headers': headers, withCredentials: true });
     }
 

@@ -47,7 +47,7 @@ export class ProjectsComponent implements OnInit {
 
             filters.forEach(filter => {
                 let val = data[filter.id as keyof Project] === null ? '' : data[filter.id as keyof Project];
-                if (typeof val === "number") {
+                if (typeof val != "string") {
                     val = val.toString();
                 }
                 matchFilter.push(val.toLowerCase().includes(filter.value.toLowerCase()));
