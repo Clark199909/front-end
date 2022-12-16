@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { StudentContactService } from "src/app/services/student-contact.service";
 import { navbartabs } from "src/app/constants/navbartabs";
@@ -34,8 +34,8 @@ export class AddContactComponent implements OnInit {
 
         this.addContactForm = new FormGroup(
             {
-                uni: new FormControl(''),
-                type: new FormControl(this.types[0]),
+                uni: new FormControl('', [Validators.required]),
+                type: new FormControl(this.types[0], [Validators.required]),
                 phone_description: new FormControl(this.phone_desc[0]),
                 country_code: new FormControl(''),
                 phone_no: new FormControl(''),
@@ -53,6 +53,12 @@ export class AddContactComponent implements OnInit {
     }
 
     onAdd() {
+
+        if (this.addContactForm.invalid || !this.studentContactService.validateForm(this.addContactForm)) {
+            alert("Please fill in all required fields!");
+            return;
+        }
+
         const data = this.studentContactService.parseFormBody(this.addContactForm);
 
         this.studentContactService.addContact(data.uni, data.type, data.body)

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SectionService } from 'src/app/services/section.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -68,8 +68,8 @@ export class EditProjectComponent {
         }
         this.editProjectForm = new FormGroup(
             {
-                project_name: new FormControl(history.state.project_name),
-                team_name: new FormControl(history.state.team_name),
+                project_name: new FormControl(history.state.project_name, [Validators.required]),
+                team_name: new FormControl(history.state.team_name, [Validators.required]),
                 team_members: team_members
             }
         );
@@ -78,28 +78,30 @@ export class EditProjectComponent {
 
     onEdit() {
 
-        const project_members = Array.from(this.selected_students);
+        if (this.editProjectForm.invalid) {
+            alert("Please fill in all fields!");
+            return;
+        }
 
+        const project_members = Array.from(this.selected_students);
 
         if (project_members.length == 0) {
             alert("Need at least one member!");
-        } else if (this.editProjectForm.value.project_name.trim() == ''
-            || this.editProjectForm.value.team_name.trim() == '') {
-            alert("Cannot have empty fields!");
-        } else {
-
-            let data = JSON.stringify({
-                project_name: this.editProjectForm.value.project_name,
-                team_name: this.editProjectForm.value.team_name,
-                project_members: project_members
-            });
-
-            this.projectService.editProject(this.call_no, this.project_id, data)
-                .subscribe(data => {
-                    alert(data);
-                    this.router.navigate(['management'], { state: { active: navbartabs.PROJECT } });
-                })
+            return;
         }
+
+        let data = JSON.stringify({
+            project_name: this.editProjectForm.value.project_name,
+            team_name: this.editProjectForm.value.team_name,
+            project_members: project_members
+        });
+
+        this.projectService.editProject(this.call_no, this.project_id, data)
+            .subscribe(data => {
+                alert(data);
+                this.router.navigate(['management'], { state: { active: navbartabs.PROJECT } });
+            })
+
     }
 
     get teamMemberFormGroups() {

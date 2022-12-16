@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { StudentInfoService } from "src/app/services/student-info.service";
@@ -83,14 +83,14 @@ export class AddStudentComponent implements OnInit {
 
         this.addStudentForm = new FormGroup(
             {
-                uni: new FormControl(''),
-                first_name: new FormControl(''),
-                last_name: new FormControl(''),
-                nationality: new FormControl(this.country_names.length === 0 ? '' : this.country_names[0]),
-                race: new FormControl(this.races[0]),
-                gender: new FormControl(this.genders[0]),
-                admission_date: new FormControl(new Date()),
-                call_no: new FormControl(this.sections[0].call_no),
+                uni: new FormControl('', [Validators.required]),
+                first_name: new FormControl('', [Validators.required]),
+                last_name: new FormControl('', [Validators.required]),
+                nationality: new FormControl(this.country_names.length === 0 ? '' : this.country_names[0], [Validators.required]),
+                race: new FormControl(this.races[0], [Validators.required]),
+                gender: new FormControl(this.genders[0], [Validators.required]),
+                admission_date: new FormControl(new Date(), [Validators.required]),
+                call_no: new FormControl(this.sections[0].call_no, [Validators.required]),
                 project_id: new FormControl('')
             }
 
@@ -98,6 +98,12 @@ export class AddStudentComponent implements OnInit {
     }
 
     onAdd() {
+
+        if (this.addStudentForm.invalid) {
+            alert("Please fill in all fields!");
+            return;
+        }
+
         let data = JSON.stringify({
             uni: this.addStudentForm.value.uni,
             first_name: this.addStudentForm.value.first_name,

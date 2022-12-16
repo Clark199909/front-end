@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, FormArray, FormBuilder } from "@angular/forms";
+import { FormGroup, FormControl, FormArray, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ProjectService } from "src/app/services/project.service";
 import { SectionService } from "src/app/services/section.service";
@@ -72,9 +72,9 @@ export class AddProjectComponent implements OnInit {
 
         this.addProjectForm = new FormGroup(
             {
-                call_no: new FormControl(this.sections[0].call_no),
-                project_name: new FormControl(''),
-                team_name: new FormControl(''),
+                call_no: new FormControl(this.sections[0].call_no, [Validators.required]),
+                project_name: new FormControl('', [Validators.required]),
+                team_name: new FormControl('', [Validators.required]),
                 team_members: team_members
             }
         );
@@ -110,28 +110,29 @@ export class AddProjectComponent implements OnInit {
 
     onAdd() {
 
+        if (this.addProjectForm.invalid) {
+            alert("Please fill in all fields!");
+            return;
+        }
+
         const call_no = this.addProjectForm.value.call_no;
         const project_members = Array.from(this.selected_students);
 
-
-
         if (project_members.length == 0) {
             alert("Need at least one member!");
-        } else if (this.addProjectForm.value.project_name.trim() == ''
-            || this.addProjectForm.value.team_name.trim() == '') {
-            alert("Cannot have empty fields!");
-        } else {
-            let data = JSON.stringify({
-                project_name: this.addProjectForm.value.project_name,
-                team_name: this.addProjectForm.value.team_name,
-                project_members: project_members
-            });
-            this.projectService.addProject(call_no, data)
-                .subscribe(data => {
-                    alert(data);
-                    this.router.navigate(['management'], { state: { active: navbartabs.PROJECT } });
-                })
         }
+
+        let data = JSON.stringify({
+            project_name: this.addProjectForm.value.project_name,
+            team_name: this.addProjectForm.value.team_name,
+            project_members: project_members
+        });
+        this.projectService.addProject(call_no, data)
+            .subscribe(data => {
+                alert(data);
+                this.router.navigate(['management'], { state: { active: navbartabs.PROJECT } });
+            })
+
 
     }
 

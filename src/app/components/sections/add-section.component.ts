@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { SectionService } from "src/app/services/section.service";
 import { navbartabs } from "src/app/constants/navbartabs";
@@ -33,22 +33,27 @@ export class AddSectionComponent implements OnInit {
 
         this.addSectionForm = new FormGroup(
             {
-                year: new FormControl(''),
-                semester: new FormControl(this.semesters[0]),
-                day: new FormControl(this.days_opts[0]),
-                start_hr: new FormControl(''),
-                start_min: new FormControl(''),
-                end_hr: new FormControl(''),
-                end_min: new FormControl(''),
-                professor: new FormControl(''),
-                classroom: new FormControl(''),
-                section_type: new FormControl(this.section_types[0])
+                year: new FormControl('', [Validators.required]),
+                semester: new FormControl(this.semesters[0], [Validators.required]),
+                day: new FormControl(this.days_opts[0], [Validators.required]),
+                start_hr: new FormControl('', [Validators.required]),
+                start_min: new FormControl('', [Validators.required]),
+                end_hr: new FormControl('', [Validators.required]),
+                end_min: new FormControl('', [Validators.required]),
+                professor: new FormControl('', [Validators.required]),
+                classroom: new FormControl('', [Validators.required]),
+                section_type: new FormControl(this.section_types[0], [Validators.required])
             }
 
         );
     }
 
     onAdd() {
+
+        if (this.addSectionForm.invalid) {
+            alert("Please fill in all fields!");
+            return;
+        }
 
         let data = JSON.stringify({
             year: this.addSectionForm.value.year,

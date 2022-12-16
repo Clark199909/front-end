@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SectionService } from 'src/app/services/section.service';
 import { navbartabs } from "src/app/constants/navbartabs";
@@ -34,16 +34,16 @@ export class EditSectionComponent {
         this.call_no = history.state.call_no;
         this.editSectionForm = new FormGroup(
             {
-                year: new FormControl(history.state.year),
-                semester: new FormControl(history.state.semester),
-                day: new FormControl(history.state.day),
-                start_hr: new FormControl(history.state.start_hr),
-                start_min: new FormControl(history.state.start_min),
-                end_hr: new FormControl(history.state.end_hr),
-                end_min: new FormControl(history.state.end_min),
-                professor: new FormControl(history.state.professor),
-                classroom: new FormControl(history.state.classroom),
-                section_type: new FormControl(history.state.section_type)
+                year: new FormControl(history.state.year, [Validators.required]),
+                semester: new FormControl(history.state.semester, [Validators.required]),
+                day: new FormControl(history.state.day, [Validators.required]),
+                start_hr: new FormControl(history.state.start_hr, [Validators.required]),
+                start_min: new FormControl(history.state.start_min, [Validators.required]),
+                end_hr: new FormControl(history.state.end_hr, [Validators.required]),
+                end_min: new FormControl(history.state.end_min, [Validators.required]),
+                professor: new FormControl(history.state.professor, [Validators.required]),
+                classroom: new FormControl(history.state.classroom, [Validators.required]),
+                section_type: new FormControl(history.state.section_type, [Validators.required])
             }
 
         );
@@ -51,6 +51,12 @@ export class EditSectionComponent {
     }
 
     onEdit() {
+
+        if (this.editSectionForm.invalid) {
+            alert("Please fill in all fields!");
+            return;
+        }
+
         let data = JSON.stringify({
             year: this.editSectionForm.value.year,
             semester: this.editSectionForm.value.semester,

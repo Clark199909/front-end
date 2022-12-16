@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { StudentInfoService } from "src/app/services/student-info.service";
@@ -85,14 +85,14 @@ export class EditStudentComponent implements OnInit {
 
         this.editStudentForm = new FormGroup(
             {
-                uni: new FormControl(history.state.uni),
-                first_name: new FormControl(name_arr[0]),
-                last_name: new FormControl(name_arr[1]),
-                nationality: new FormControl(history.state.nationality),
-                race: new FormControl(history.state.race),
-                gender: new FormControl(history.state.gender),
-                admission_date: new FormControl(new Date(history.state.admission_date)),
-                call_no: new FormControl(history.state.call_no),
+                uni: new FormControl(history.state.uni, [Validators.required]),
+                first_name: new FormControl(name_arr[0], [Validators.required]),
+                last_name: new FormControl(name_arr[1], [Validators.required]),
+                nationality: new FormControl(history.state.nationality, [Validators.required]),
+                race: new FormControl(history.state.race, [Validators.required]),
+                gender: new FormControl(history.state.gender, [Validators.required]),
+                admission_date: new FormControl(new Date(history.state.admission_date), [Validators.required]),
+                call_no: new FormControl(history.state.call_no, [Validators.required]),
                 project_id: new FormControl(history.state.project_id)
             }
 
@@ -104,6 +104,12 @@ export class EditStudentComponent implements OnInit {
     }
 
     onEdit() {
+
+        if (this.editStudentForm.invalid) {
+            alert("Please fill in all fields!");
+            return;
+        }
+
         let uni = this.editStudentForm.value.uni;
         let data = JSON.stringify({
             first_name: this.editStudentForm.value.first_name,

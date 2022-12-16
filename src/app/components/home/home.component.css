@@ -5,7 +5,7 @@ html {
 
 .bg {
     /* The image used */
-    background-image: url("https://cdn.pixabay.com/photo/2020/02/15/14/33/network-4851119_1280.jpg");
+    background-image: url("src/app/images/home.jpg");
     /* Full height */
     height: 100%;
     /* Center and scale the image nicely */

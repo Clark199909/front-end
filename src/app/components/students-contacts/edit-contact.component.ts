@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StudentContactService } from 'src/app/services/student-contact.service';
 import { navbartabs } from "src/app/constants/navbartabs";
@@ -37,8 +37,8 @@ export class EditContactComponent {
 
         this.editContactForm = new FormGroup(
             {
-                uni: new FormControl(''),
-                type: new FormControl(type),
+                uni: new FormControl('', [Validators.required]),
+                type: new FormControl(type, [Validators.required]),
                 phone_description: new FormControl(""),
                 country_code: new FormControl(''),
                 phone_no: new FormControl(''),
@@ -100,6 +100,12 @@ export class EditContactComponent {
     }
 
     onEdit() {
+
+        if (this.editContactForm.invalid || !this.studentContactService.validateForm(this.editContactForm)) {
+            alert("Please fill in all required fields!");
+            return;
+        }
+
         const data = this.studentContactService.parseFormBody(this.editContactForm);
 
         this.studentContactService.editContact(data.uni, data.type, data.body)
@@ -108,4 +114,6 @@ export class EditContactComponent {
                 this.router.navigate(['management'], { state: { active: navbartabs.CONTACT } });
             })
     }
+
+
 }
