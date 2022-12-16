@@ -33,7 +33,10 @@
 
         <ng-container matColumnDef="time">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Time </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.start_hr}}:{{row.start_min}}~{{row.end_hr}}:{{row.end_min}}
+            <mat-cell *matCellDef="let row"> {{(row.start_hr == 0)?"00":row.start_hr}}:{{(row.start_min ==
+                0)?"00":row.start_min}}~{{(row.end_hr ==
+                0)?"00":row.end_hr}}:{{(row.end_min ==
+                0)?"00":row.end_min}}
             </mat-cell>
         </ng-container>
 

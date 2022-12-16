@@ -10,7 +10,9 @@
                     <mat-select formControlName="call_no">
                         <mat-option *ngFor="let s of sections" [value]="s.call_no">
                             {{s.year}} {{s.semester}} {{s.day}}
-                            {{s.start_hr}}:{{s.start_min}}~{{s.end_hr}}:{{s.end_min}}
+                            {{(s.start_hr == 0)?"00":s.start_hr}}:{{(s.start_min == 0)?"00":s.start_min}}~{{(s.end_hr ==
+                            0)?"00":s.end_hr}}:{{(s.end_min ==
+                            0)?"00":s.end_min}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

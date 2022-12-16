@@ -7,7 +7,11 @@
             <div>
                 <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Year</mat-label>
-                    <input type="number" formControlName="year" matInput required />
+                    <mat-select formControlName="year">
+                        <mat-option *ngFor="let y of years" [value]="y">
+                            {{y}}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
             <div>
@@ -32,26 +36,16 @@
             </div>
             <div>
                 <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Start Hour</mat-label>
-                    <input type="number" formControlName="start_hr" matInput required />
+                    <mat-label>Start Time</mat-label>
+                    <input matInput matTimepicker formControlName="start_time" />
+                    <mat-hint>MM:HH</mat-hint>
                 </mat-form-field>
             </div>
             <div>
                 <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Start Min</mat-label>
-                    <input type="number" formControlName="start_min" matInput required />
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>End Hour</mat-label>
-                    <input type="number" formControlName="end_hr" matInput required />
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>End Min</mat-label>
-                    <input type="number" formControlName="end_min" matInput required />
+                    <mat-label>End Time</mat-label>
+                    <input matInput matTimepicker formControlName="end_time" />
+                    <mat-hint>MM:HH</mat-hint>
                 </mat-form-field>
             </div>
             <div>

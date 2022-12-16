@@ -15,6 +15,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatTimepickerModule } from 'mat-timepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -70,6 +71,7 @@ import { HomeComponent } from './components/home/home.component';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTimepickerModule,
     ReactiveFormsModule
   ],
   providers: [],
