@@ -99,7 +99,7 @@ export class EditProjectComponent {
         this.projectService.editProject(this.call_no, this.project_id, data)
             .subscribe(data => {
                 alert(data);
-                this.router.navigate(['management'], { state: { active: navbartabs.PROJECT } });
+                this.router.navigate(['management'], { state: { active: navbartabs.PROJECT, loggedIn: this.loggedIn } });
             })
 
     }

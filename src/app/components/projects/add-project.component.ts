@@ -120,6 +120,7 @@ export class AddProjectComponent implements OnInit {
 
         if (project_members.length == 0) {
             alert("Need at least one member!");
+            return;
         }
 
         let data = JSON.stringify({
@@ -130,7 +131,7 @@ export class AddProjectComponent implements OnInit {
         this.projectService.addProject(call_no, data)
             .subscribe(data => {
                 alert(data);
-                this.router.navigate(['management'], { state: { active: navbartabs.PROJECT } });
+                this.router.navigate(['management'], { state: { active: navbartabs.PROJECT, loggedIn: this.loggedIn } });
             })
 
 

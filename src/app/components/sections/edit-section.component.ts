@@ -73,7 +73,7 @@ export class EditSectionComponent {
         this.sectionService.editSection(this.call_no, data)
             .subscribe(data => {
                 alert(data);
-                this.router.navigate(['management'], { state: { active: navbartabs.SECTION } });
+                this.router.navigate(['management'], { state: { active: navbartabs.SECTION, loggedIn: this.loggedIn } });
             })
     }
 }

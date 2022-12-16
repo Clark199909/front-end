@@ -125,7 +125,7 @@ export class EditStudentComponent implements OnInit {
         this.studentInfoService.editContact(uni, data)
             .subscribe(data => {
                 alert(data);
-                this.router.navigate(['management'], { state: { active: navbartabs.STUDENT } });
+                this.router.navigate(['management'], { state: { active: navbartabs.STUDENT, loggedIn: this.loggedIn } });
             })
     }
 

@@ -111,7 +111,7 @@ export class EditContactComponent {
         this.studentContactService.editContact(data.uni, data.type, data.body)
             .subscribe(data => {
                 alert(data);
-                this.router.navigate(['management'], { state: { active: navbartabs.CONTACT } });
+                this.router.navigate(['management'], { state: { active: navbartabs.CONTACT, loggedIn: this.loggedIn } });
             })
     }
 

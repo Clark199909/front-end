@@ -71,7 +71,7 @@ export class AddSectionComponent implements OnInit {
         this.sectionService.addSection(data)
             .subscribe(data => {
                 alert(data);
-                this.router.navigate(['management'], { state: { active: navbartabs.SECTION } });
+                this.router.navigate(['management'], { state: { active: navbartabs.SECTION, loggedIn: this.loggedIn } });
             })
     }
 }
