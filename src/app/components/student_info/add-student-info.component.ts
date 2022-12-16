@@ -4,7 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { StudentInfoService } from "src/app/services/student-info.service";
 import { CountryService } from "src/app/services/country.service";
+import { ProjectService } from "src/app/services/project.service";
 import { Section } from "src/app/models/section";
+import { Project } from "src/app/models/project";
 import { SectionService } from "src/app/services/section.service";
 
 @Component({
@@ -19,6 +21,7 @@ export class AddStudentComponent implements OnInit {
     studentInfoService: StudentInfoService;
     countryService: CountryService;
     sectionService: SectionService;
+    projectService: ProjectService;
     country_names: string[] = [];
     races: string[] =
         [
@@ -45,15 +48,20 @@ export class AddStudentComponent implements OnInit {
             'Trans Woman/Female'
         ]
     sections!: Section[];
+    projects!: Project[];
+    addToProject: boolean;
 
 
     constructor(private http: HttpClient, private router: Router,
         studentInfoService: StudentInfoService,
         countryService: CountryService,
-        sectionService: SectionService) {
+        sectionService: SectionService,
+        projectService: ProjectService) {
         this.studentInfoService = studentInfoService;
         this.countryService = countryService;
         this.sectionService = sectionService;
+        this.projectService = projectService;
+        this.addToProject = false;
     }
 
     async ngOnInit(): Promise<void> {
@@ -62,6 +70,7 @@ export class AddStudentComponent implements OnInit {
             this.country_names.push(countries[i].text);
         }
         this.sections = await this.sectionService.getSections();
+        this.projects = await this.projectService.getProjects();
 
         this.addStudentForm = new FormGroup(
             {
@@ -89,7 +98,7 @@ export class AddStudentComponent implements OnInit {
             gender: this.addStudentForm.value.gender,
             admission_date: this.addStudentForm.value.admission_date.toLocaleDateString("en-US"),
             call_no: this.addStudentForm.value.call_no,
-            project_id: null,
+            project_id: (this.addStudentForm.value.project_id == '') ? null : this.addStudentForm.value.project_id,
         });
 
         this.studentInfoService.addStudent(data)
@@ -97,5 +106,20 @@ export class AddStudentComponent implements OnInit {
                 alert(data);
                 this.router.navigate(['']);
             })
+    }
+
+    addProject(): void {
+        if (this.projects.length > 0) {
+            this.addStudentForm.patchValue({ 'project_id': this.projects[0].id });
+            this.addToProject = true;
+        } else {
+            alert("No Project Available!");
+        }
+
+    }
+
+    deleteProject(): void {
+        this.addStudentForm.patchValue({ 'project_id': "" });
+        this.addToProject = false;
     }
 }
