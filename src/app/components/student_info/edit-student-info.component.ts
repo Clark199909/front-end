@@ -4,8 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { StudentInfoService } from "src/app/services/student-info.service";
 import { CountryService } from "src/app/services/country.service";
+import { ProjectService } from "src/app/services/project.service";
 import { Section } from "src/app/models/section";
+import { Project } from "src/app/models/project";
 import { SectionService } from "src/app/services/section.service";
+import { navbartabs } from "src/app/constants/navbartabs";
 
 @Component({
     selector: 'app-edit-student-info-component',
@@ -19,6 +22,7 @@ export class EditStudentComponent implements OnInit {
     studentInfoService: StudentInfoService;
     countryService: CountryService;
     sectionService: SectionService;
+    projectService: ProjectService;
     country_names: string[] = [];
     races: string[] =
         [
@@ -45,23 +49,37 @@ export class EditStudentComponent implements OnInit {
             'Trans Woman/Female'
         ]
     sections!: Section[];
+    projects!: Project[];
+    addToProject: boolean;
+    loggedIn = false;
 
 
     constructor(private http: HttpClient, private router: Router,
         studentInfoService: StudentInfoService,
         countryService: CountryService,
-        sectionService: SectionService) {
+        sectionService: SectionService,
+        projectService: ProjectService) {
         this.studentInfoService = studentInfoService;
         this.countryService = countryService;
         this.sectionService = sectionService;
+        this.projectService = projectService;
+        this.addToProject = false;
     }
 
     async ngOnInit(): Promise<void> {
+        if (history.state.loggedIn != undefined) {
+            this.loggedIn = history.state.loggedIn;
+        }
+        if (!this.loggedIn) {
+            alert("Need to login first!");
+        }
+
         const countries = await this.countryService.getCountries();
         for (let i = 0; i < countries.length; ++i) {
             this.country_names.push(countries[i].text);
         }
         this.sections = await this.sectionService.getSections();
+        this.projects = await this.projectService.getProjects();
 
         const name_arr = history.state.name.split(',');
 
@@ -79,6 +97,10 @@ export class EditStudentComponent implements OnInit {
             }
 
         );
+
+        if (history.state.project_id != null) {
+            this.addToProject = true;
+        }
     }
 
     onEdit() {
@@ -91,13 +113,28 @@ export class EditStudentComponent implements OnInit {
             gender: this.editStudentForm.value.gender,
             admission_date: this.editStudentForm.value.admission_date.toLocaleDateString("en-US"),
             call_no: this.editStudentForm.value.call_no,
-            project_id: this.editStudentForm.value.project_id,
+            project_id: (this.editStudentForm.value.project_id == '') ? null : this.editStudentForm.value.project_id
         });
 
         this.studentInfoService.editContact(uni, data)
             .subscribe(data => {
                 alert(data);
-                this.router.navigate(['']);
+                this.router.navigate(['management'], { state: { active: navbartabs.STUDENT } });
             })
+    }
+
+    addProject(): void {
+        if (this.projects.length > 0) {
+            this.editStudentForm.patchValue({ 'project_id': this.projects[0].id });
+            this.addToProject = true;
+        } else {
+            alert("No Project Available!");
+        }
+
+    }
+
+    deleteProject(): void {
+        this.editStudentForm.patchValue({ 'project_id': "" });
+        this.addToProject = false;
     }
 }

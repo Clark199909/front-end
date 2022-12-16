@@ -55,6 +55,20 @@
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
             </div>
+            <div *ngIf="addToProject">
+                <mat-form-field class="shorter-width" appearance="outline">
+                    <mat-label>Project</mat-label>
+                    <mat-select formControlName="project_id">
+                        <mat-option *ngFor="let p of projects" [value]="p.id">
+                            Project:{{p.project_name}}, Team:{{p.team_name}}, Members:({{p.project_members.toString()}})
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button class="delete-project-button" color="warn" mat-button (click)="deleteProject()">Delete</button>
+            </div>
+            <div *ngIf="!addToProject" class="add-to-project-button">
+                <a mat-button color="primary" (click)="addProject()">Add Project</a>
+            </div>
             <button mat-flat-button color="primary">Submit</button>
         </form>
     </mat-card-content>

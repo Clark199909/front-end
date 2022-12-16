@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { StudentContactService } from "src/app/services/student-contact.service";
+import { navbartabs } from "src/app/constants/navbartabs";
 
 @Component({
     selector: 'app-add-contact-component',
@@ -17,12 +18,20 @@ export class AddContactComponent implements OnInit {
     phone_desc: string[] = ['home', 'mobile', 'work'];
     address_desc: string[] = ['home', 'campus', 'work'];
     email_desc: string[] = ['personal', 'education', 'work'];
+    loggedIn = false;
 
     constructor(private router: Router, studentContactService: StudentContactService) {
         this.studentContactService = studentContactService;
     }
 
     ngOnInit(): void {
+        if (history.state.loggedIn != undefined) {
+            this.loggedIn = history.state.loggedIn;
+        }
+        if (!this.loggedIn) {
+            alert("Need to login first!");
+        }
+
         this.addContactForm = new FormGroup(
             {
                 uni: new FormControl(''),
@@ -49,7 +58,7 @@ export class AddContactComponent implements OnInit {
         this.studentContactService.addContact(data.uni, data.type, data.body)
             .subscribe(data => {
                 alert(data);
-                this.router.navigate(['']);
+                this.router.navigate(['management'], { state: { active: navbartabs.CONTACT } });
             })
     }
 }

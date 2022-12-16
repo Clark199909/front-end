@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { SectionService } from "src/app/services/section.service";
+import { navbartabs } from "src/app/constants/navbartabs";
 
 @Component({
     selector: 'app-add-section-component',
@@ -16,13 +17,20 @@ export class AddSectionComponent implements OnInit {
     semesters: string[] = ['Fall', 'Spring', 'Summer'];
     days_opts: string[] = ['M', 'T', 'W', 'R', 'F', 'MW', 'TR', 'MWF'];
     section_types: string[] = ['in_person', 'CVN']
-
+    loggedIn = false;
 
     constructor(private router: Router, sectionService: SectionService) {
         this.sectionService = sectionService;
     }
 
     ngOnInit(): void {
+        if (history.state.loggedIn != undefined) {
+            this.loggedIn = history.state.loggedIn;
+        }
+        if (!this.loggedIn) {
+            alert("Need to login first!");
+        }
+
         this.addSectionForm = new FormGroup(
             {
                 year: new FormControl(''),
@@ -58,7 +66,7 @@ export class AddSectionComponent implements OnInit {
         this.sectionService.addSection(data)
             .subscribe(data => {
                 alert(data);
-                this.router.navigate(['']);
+                this.router.navigate(['management'], { state: { active: navbartabs.SECTION } });
             })
     }
 }

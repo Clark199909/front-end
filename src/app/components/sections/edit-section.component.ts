@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SectionService } from 'src/app/services/section.service';
+import { navbartabs } from "src/app/constants/navbartabs";
 
 @Component({
     selector: 'edit-section-component',
@@ -16,12 +17,20 @@ export class EditSectionComponent {
     days_opts: string[] = ['M', 'T', 'W', 'R', 'F', 'MW', 'TR', 'MWF'];
     section_types: string[] = ['in_person', 'CVN']
     call_no!: number;
+    loggedIn = false;
 
     constructor(private router: Router, sectionService: SectionService) {
         this.sectionService = sectionService;
     }
 
     ngOnInit() {
+        if (history.state.loggedIn != undefined) {
+            this.loggedIn = history.state.loggedIn;
+        }
+        if (!this.loggedIn) {
+            alert("Need to login first!");
+        }
+
         this.call_no = history.state.call_no;
         this.editSectionForm = new FormGroup(
             {
@@ -58,7 +67,7 @@ export class EditSectionComponent {
         this.sectionService.editSection(this.call_no, data)
             .subscribe(data => {
                 alert(data);
-                this.router.navigate(['']);
+                this.router.navigate(['management'], { state: { active: navbartabs.SECTION } });
             })
     }
 }

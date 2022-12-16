@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StudentContact } from '../models/student-contact';
 import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
+import { BASEPATH } from '../constants/basepath';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,8 @@ export class StudentContactService {
     }
 
     async getContacts(): Promise<StudentContact[]> {
-        const res = await this.http.get<StudentContact[]>('https://127.0.0.1:5011/api/contacts/all', { withCredentials: true }).toPromise();
+        const url = `${BASEPATH}/api/contacts/all`;
+        const res = await this.http.get<StudentContact[]>(url, { withCredentials: true }).toPromise();
         if (res === undefined) {
             const students: StudentContact[] = [];
             return students
@@ -24,18 +26,18 @@ export class StudentContactService {
 
     addContact(uni: string, type: string, body: string): Observable<any> {
         const headers = { 'content-type': 'application/json' }
-        const url = `https://127.0.0.1:5011/api/contacts/${uni}/add/${type}`;
+        const url = `${BASEPATH}/api/contacts/${uni}/add/${type}`;
         return this.http.post(url, body, { 'headers': headers, withCredentials: true });
     }
 
     editContact(uni: string, type: string, body: string): Observable<any> {
         const headers = { 'content-type': 'application/json' }
-        const url = `https://127.0.0.1:5011/api/contacts/${uni}/update/${type}`;
+        const url = `${BASEPATH}/api/contacts/${uni}/update/${type}`;
         return this.http.put(url, body, { 'headers': headers, withCredentials: true });
     }
 
     deleteContact(uni: string, type: string, note: string): Observable<any> {
-        const url = `https://127.0.0.1:5011/api/contacts/${uni}/del/${type}/${note}`;
+        const url = `${BASEPATH}/api/contacts/${uni}/del/${type}/${note}`;
         return this.http.delete<any>(url, { withCredentials: true });
     }
 

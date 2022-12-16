@@ -11,3 +11,16 @@ mat-card {
 .full-width {
     width: 80%;
 }
+
+.add-to-project-button {
+    margin-bottom: 1em;
+}
+
+.shorter-width {
+    width: 65%;
+    margin-right: 4%;
+}
+
+.delete-project-button {
+    width: 10%;
+}

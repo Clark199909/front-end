@@ -6,6 +6,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { StudentInfoService } from 'src/app/services/student-info.service';
 import { Section } from 'src/app/models/section';
 import { startWith, pairwise } from 'rxjs/operators';
+import { navbartabs } from "src/app/constants/navbartabs";
 
 @Component({
     selector: 'edit-project-component',
@@ -22,6 +23,7 @@ export class EditProjectComponent {
     call_no!: number;
     students!: { [key: string]: string };
     selected_students: Set<string>;
+    loggedIn = false;
 
     constructor(private router: Router,
         projectService: ProjectService,
@@ -34,6 +36,13 @@ export class EditProjectComponent {
     }
 
     async ngOnInit() {
+        if (history.state.loggedIn != undefined) {
+            this.loggedIn = history.state.loggedIn;
+        }
+        if (!this.loggedIn) {
+            alert("Need to login first!");
+        }
+
         this.project_id = history.state.project_id;
         this.call_no = history.state.call_no;
         this.students = await this.studentInfoService.getAvailableStudents(history.state.call_no, history.state.project_id);
@@ -88,7 +97,7 @@ export class EditProjectComponent {
             this.projectService.editProject(this.call_no, this.project_id, data)
                 .subscribe(data => {
                     alert(data);
-                    this.router.navigate(['']);
+                    this.router.navigate(['management'], { state: { active: navbartabs.PROJECT } });
                 })
         }
     }

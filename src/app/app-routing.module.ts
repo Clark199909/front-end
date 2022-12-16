@@ -9,17 +9,19 @@ import { AddProjectComponent } from './components/projects/add-project.component
 import { EditProjectComponent } from './components/projects/edit-project.component';
 import { AddStudentComponent } from './components/student_info/add-student-info.component';
 import { EditStudentComponent } from './components/student_info/edit-student-info.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-  { path: '', component: NavbarComponent },
-  { path: 'add-contact', component: AddContactComponent },
-  { path: 'edit-contact', component: EditContactComponent },
-  { path: 'add-section', component: AddSectionComponent },
-  { path: 'edit-section', component: EditSectionComponent },
-  { path: 'add-project', component: AddProjectComponent },
-  { path: 'edit-project', component: EditProjectComponent },
-  { path: 'add-student', component: AddStudentComponent },
-  { path: 'edit-student', component: EditStudentComponent }
+  { path: '', component: HomeComponent },
+  { path: 'management', component: NavbarComponent },
+  { path: 'management/add-contact', component: AddContactComponent },
+  { path: 'management/edit-contact', component: EditContactComponent },
+  { path: 'management/add-section', component: AddSectionComponent },
+  { path: 'management/edit-section', component: EditSectionComponent },
+  { path: 'management/add-project', component: AddProjectComponent },
+  { path: 'management/edit-project', component: EditProjectComponent },
+  { path: 'management/add-student', component: AddStudentComponent },
+  { path: 'management/edit-student', component: EditStudentComponent }
 ];
 
 @NgModule({

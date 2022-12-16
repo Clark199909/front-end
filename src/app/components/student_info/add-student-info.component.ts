@@ -8,6 +8,7 @@ import { ProjectService } from "src/app/services/project.service";
 import { Section } from "src/app/models/section";
 import { Project } from "src/app/models/project";
 import { SectionService } from "src/app/services/section.service";
+import { navbartabs } from "src/app/constants/navbartabs";
 
 @Component({
     selector: 'app-add-student-info-component',
@@ -50,6 +51,7 @@ export class AddStudentComponent implements OnInit {
     sections!: Section[];
     projects!: Project[];
     addToProject: boolean;
+    loggedIn = false;
 
 
     constructor(private http: HttpClient, private router: Router,
@@ -65,6 +67,13 @@ export class AddStudentComponent implements OnInit {
     }
 
     async ngOnInit(): Promise<void> {
+        if (history.state.loggedIn != undefined) {
+            this.loggedIn = history.state.loggedIn;
+        }
+        if (!this.loggedIn) {
+            alert("Need to login first!");
+        }
+
         const countries = await this.countryService.getCountries();
         for (let i = 0; i < countries.length; ++i) {
             this.country_names.push(countries[i].text);
@@ -98,13 +107,13 @@ export class AddStudentComponent implements OnInit {
             gender: this.addStudentForm.value.gender,
             admission_date: this.addStudentForm.value.admission_date.toLocaleDateString("en-US"),
             call_no: this.addStudentForm.value.call_no,
-            project_id: (this.addStudentForm.value.project_id == '') ? null : this.addStudentForm.value.project_id,
+            project_id: (this.addStudentForm.value.project_id == '') ? null : this.addStudentForm.value.project_id
         });
 
         this.studentInfoService.addStudent(data)
             .subscribe(data => {
                 alert(data);
-                this.router.navigate(['']);
+                this.router.navigate(['management'], { state: { active: navbartabs.STUDENT } });
             })
     }
 

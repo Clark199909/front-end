@@ -6,6 +6,7 @@ import { SectionService } from "src/app/services/section.service";
 import { StudentInfoService } from "src/app/services/student-info.service";
 import { Section } from "src/app/models/section";
 import { startWith, pairwise } from 'rxjs/operators';
+import { navbartabs } from "src/app/constants/navbartabs";
 
 @Component({
     selector: 'app-add-project-component',
@@ -22,6 +23,7 @@ export class AddProjectComponent implements OnInit {
     sections!: Section[];
     students!: { [key: string]: string };
     selected_students: Set<string>;
+    loggedIn = false;
 
 
     constructor(private router: Router,
@@ -35,6 +37,13 @@ export class AddProjectComponent implements OnInit {
     }
 
     async ngOnInit(): Promise<void> {
+        if (history.state.loggedIn != undefined) {
+            this.loggedIn = history.state.loggedIn;
+        }
+        if (!this.loggedIn) {
+            alert("Need to login first!");
+        }
+
         this.sections = await this.sectionService.getSections();
         if (this.sections.length == 0) {
             alert("No Section is available!");
@@ -120,7 +129,7 @@ export class AddProjectComponent implements OnInit {
             this.projectService.addProject(call_no, data)
                 .subscribe(data => {
                     alert(data);
-                    this.router.navigate(['']);
+                    this.router.navigate(['management'], { state: { active: navbartabs.PROJECT } });
                 })
         }
 

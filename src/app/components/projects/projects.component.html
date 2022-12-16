@@ -12,7 +12,8 @@
         </mat-select>
     </mat-form-field>
 
-    <button class="add-project-button" routerLink="./add-project" mat-button color="accent">Add Project</button>
+    <button class="add-project-button" routerLink="./add-project" [state]="{loggedIn:true}" mat-button
+        color="accent">Add Project</button>
 
 </div>
 
@@ -46,7 +47,7 @@
             <mat-cell *matCellDef="let row">
                 <button mat-button color="warn" (click)="deleteProject(row.call_no, row.id)">Delete</button>
                 <button mat-button color="primary" routerLink="./edit-project"
-                    [state]="{ call_no:row.call_no, project_id:row.id, team_name:row.team_name, project_name:row.project_name, project_members:row.project_members}">Edit</button>
+                    [state]="{ loggedIn:true, call_no:row.call_no, project_id:row.id, team_name:row.team_name, project_name:row.project_name, project_members:row.project_members}">Edit</button>
             </mat-cell>
         </ng-container>
 

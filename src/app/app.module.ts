@@ -16,7 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AddSectionComponent } from './components/sections/add-section.component';
+
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -25,12 +25,14 @@ import { StudentContactsComponent } from './components/students-contacts/student
 import { AddContactComponent } from './components/students-contacts/add-contact.component';
 import { EditContactComponent } from './components/students-contacts/edit-contact.component';
 import { SectionsComponent } from './components/sections/sections.component';
+import { AddSectionComponent } from './components/sections/add-section.component';
 import { EditSectionComponent } from './components/sections/edit-section.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { AddProjectComponent } from './components/projects/add-project.component';
 import { EditProjectComponent } from './components/projects/edit-project.component';
 import { AddStudentComponent } from './components/student_info/add-student-info.component';
 import { EditStudentComponent } from './components/student_info/edit-student-info.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -48,7 +50,8 @@ import { EditStudentComponent } from './components/student_info/edit-student-inf
     AddProjectComponent,
     EditProjectComponent,
     AddStudentComponent,
-    EditStudentComponent
+    EditStudentComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
