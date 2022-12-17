@@ -129,9 +129,15 @@ export class AddProjectComponent implements OnInit {
             project_members: project_members
         });
         this.projectService.addProject(call_no, data)
-            .subscribe(data => {
-                alert(data);
-                this.router.navigate(['management'], { state: { active: navbartabs.PROJECT, loggedIn: this.loggedIn } });
+            .subscribe({
+                next: () => {
+                    alert("Add successfully!");
+                    this.router.navigate(['management'], { state: { active: navbartabs.PROJECT, loggedIn: this.loggedIn } });
+                },
+                error: () => {
+                    alert("Add failed!");
+                }
+
             })
 
 

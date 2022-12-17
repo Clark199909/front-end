@@ -97,10 +97,15 @@ export class EditProjectComponent {
         });
 
         this.projectService.editProject(this.call_no, this.project_id, data)
-            .subscribe(data => {
-                alert(data);
-                this.router.navigate(['management'], { state: { active: navbartabs.PROJECT, loggedIn: this.loggedIn } });
-            })
+            .subscribe({
+                next: () => {
+                    alert("Edit successfully!");
+                    this.router.navigate(['management'], { state: { active: navbartabs.PROJECT, loggedIn: this.loggedIn } });
+                },
+                error: () => {
+                    alert("Edit failed!");
+                }
+            });
 
     }
 

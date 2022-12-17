@@ -109,10 +109,16 @@ export class EditContactComponent {
         const data = this.studentContactService.parseFormBody(this.editContactForm);
 
         this.studentContactService.editContact(data.uni, data.type, data.body)
-            .subscribe(data => {
-                alert(data);
-                this.router.navigate(['management'], { state: { active: navbartabs.CONTACT, loggedIn: this.loggedIn } });
-            })
+            .subscribe({
+                next: data => {
+                    alert(data);
+                    this.router.navigate(['management'], { state: { active: navbartabs.CONTACT, loggedIn: this.loggedIn } });
+                },
+                error: () => {
+                    alert("Edit failed!");
+                }
+
+            });
     }
 
 

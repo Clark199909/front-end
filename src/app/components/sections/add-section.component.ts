@@ -75,9 +75,14 @@ export class AddSectionComponent implements OnInit {
         });
 
         this.sectionService.addSection(data)
-            .subscribe(data => {
-                alert(data);
-                this.router.navigate(['management'], { state: { active: navbartabs.SECTION, loggedIn: this.loggedIn } });
+            .subscribe({
+                next: () => {
+                    alert("Section successfully added!");
+                    this.router.navigate(['management'], { state: { active: navbartabs.SECTION, loggedIn: this.loggedIn } });
+                },
+                error: data => {
+                    alert("Section cannot be added!");
+                }
             })
     }
 }

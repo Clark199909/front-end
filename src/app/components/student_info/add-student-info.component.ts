@@ -117,9 +117,15 @@ export class AddStudentComponent implements OnInit {
         });
 
         this.studentInfoService.addStudent(data)
-            .subscribe(data => {
-                alert(data);
-                this.router.navigate(['management'], { state: { active: navbartabs.STUDENT, loggedIn: this.loggedIn } });
+            .subscribe({
+                next: () => {
+                    alert("Student successfully added!");
+                    this.router.navigate(['management'], { state: { active: navbartabs.STUDENT, loggedIn: this.loggedIn } });
+                },
+                error: () => {
+                    alert("Student cannot be added!");
+                }
+
             })
     }
 

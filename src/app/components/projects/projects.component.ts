@@ -70,9 +70,14 @@ export class ProjectsComponent implements OnInit {
     }
 
     deleteProject(call_no: number, project_id: number) {
-        this.projectService.deleteProject(call_no, project_id).subscribe(data => {
-            alert(data);
-            this.ngAfterViewInit();
+        this.projectService.deleteProject(call_no, project_id).subscribe({
+            next: () => {
+                alert('Delete successfully!');
+                this.ngAfterViewInit();
+            },
+            error: () => {
+                alert("Delete failed!");
+            }
         });
     }
 

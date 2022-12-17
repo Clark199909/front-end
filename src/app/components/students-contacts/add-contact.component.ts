@@ -62,9 +62,15 @@ export class AddContactComponent implements OnInit {
         const data = this.studentContactService.parseFormBody(this.addContactForm);
 
         this.studentContactService.addContact(data.uni, data.type, data.body)
-            .subscribe(data => {
-                alert(data);
-                this.router.navigate(['management'], { state: { active: navbartabs.CONTACT, loggedIn: this.loggedIn } });
+            .subscribe({
+                next: () => {
+                    alert("Student successfully added!");
+                    this.router.navigate(['management'], { state: { active: navbartabs.CONTACT, loggedIn: this.loggedIn } });
+                },
+                error: () => {
+                    alert("Student cannot be added!");
+                }
+
             })
     }
 }

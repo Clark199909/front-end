@@ -71,9 +71,15 @@ export class StudentContactsComponent implements OnInit {
     }
 
     deleteContact(uni: string, type: string, note: string) {
-        this.studentContactService.deleteContact(uni, type, note).subscribe(() => {
-            alert('Delete successful');
-            this.ngAfterViewInit();
+        this.studentContactService.deleteContact(uni, type, note).subscribe({
+            next: () => {
+                alert('Delete successfully!');
+                this.ngAfterViewInit();
+            },
+            error: () => {
+                alert("Delete failed!");
+            }
+
         });
     }
 

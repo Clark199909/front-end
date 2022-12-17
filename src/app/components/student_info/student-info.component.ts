@@ -67,9 +67,15 @@ export class StudentInfoComponent implements OnInit {
     }
 
     deleteStudent(call_no: number, uni: string): void {
-        this.studentInfoService.deleteStudent(call_no, uni).subscribe(data => {
-            alert(data);
-            this.ngAfterViewInit();
+        this.studentInfoService.deleteStudent(call_no, uni).subscribe({
+            next: () => {
+                alert('Delete successfully!');
+                this.ngAfterViewInit();
+            },
+            error: () => {
+                alert("Delete failed!");
+            }
+
         });
     }
 
