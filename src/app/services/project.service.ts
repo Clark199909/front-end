@@ -33,13 +33,13 @@ export class ProjectService extends Base {
 
     addProject(call_no: number, body: string): Observable<any> {
         const headers = { 'content-type': 'application/json' }
-        const url = `${BASEPATH}/api/courses/${call_no}/new_project`
+        const url = `/api/courses/${call_no}/new_project`
         return this.http.post(url, body, { 'headers': this.post_put_headers })
     }
 
     editProject(call_no: number, project_id: number, body: string): Observable<any> {
         const headers = { 'content-type': 'application/json' }
-        const url = `${BASEPATH}/api/courses/${call_no}/projects/${project_id}`;
+        const url = `/api/courses/${call_no}/projects/${project_id}`;
         return this.http.put(url, body, { 'headers': this.post_put_headers, withCredentials: true });
     }
 
