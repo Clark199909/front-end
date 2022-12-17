@@ -4,19 +4,21 @@ import { StudentContact } from '../models/student-contact';
 import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { BASEPATH } from '../constants/basepath';
+import { Base } from './base.service';
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class StudentContactService {
+export class StudentContactService extends Base {
 
     constructor(private http: HttpClient) {
+        super();
     }
 
     async getContacts(): Promise<StudentContact[]> {
-        const url = `${BASEPATH}/api/contacts/all`;
-        const res = await this.http.get<StudentContact[]>(url, { withCredentials: true }).toPromise();
+        const url = `/api/contacts/all`;
+        const res = await this.http.get<StudentContact[]>(url, { headers: this.get_del_headers, withCredentials: true }).toPromise();
         if (res === undefined) {
             const students: StudentContact[] = [];
             return students
@@ -26,19 +28,19 @@ export class StudentContactService {
 
     addContact(uni: string, type: string, body: string): Observable<any> {
         const headers = { 'content-type': 'application/json' }
-        const url = `${BASEPATH}/api/contacts/${uni}/add/${type}`;
-        return this.http.post(url, body, { 'headers': headers, withCredentials: true });
+        const url = `/api/contacts/${uni}/add/${type}`;
+        return this.http.post(url, body, { 'headers': this.post_put_headers, withCredentials: true });
     }
 
     editContact(uni: string, type: string, body: string): Observable<any> {
         const headers = { 'content-type': 'application/json' }
-        const url = `${BASEPATH}/api/contacts/${uni}/update/${type}`;
-        return this.http.put(url, body, { 'headers': headers, withCredentials: true });
+        const url = `/api/contacts/${uni}/update/${type}`;
+        return this.http.put(url, body, { 'headers': this.post_put_headers, withCredentials: true });
     }
 
     deleteContact(uni: string, type: string, note: string): Observable<any> {
-        const url = `${BASEPATH}/api/contacts/${uni}/del/${type}/${note}`;
-        return this.http.delete<any>(url, { withCredentials: true });
+        const url = `/api/contacts/${uni}/del/${type}/${note}`;
+        return this.http.delete<any>(url, { headers: this.get_del_headers, withCredentials: true });
     }
 
     parseFormBody(formGroup: FormGroup) {

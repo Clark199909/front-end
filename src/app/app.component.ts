@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
     if (sessionStorage.getItem("uid") != null) {
       headers = headers.set("Uid", sessionStorage.getItem("uid") || "")
     }
-    this.http.get(`${BASEPATH}/logout`, { headers: headers, observe: 'response', withCredentials: true }).subscribe(data => {
+    this.http.get(`/logout`, { headers: headers, observe: 'response', withCredentials: true }).subscribe(data => {
       if (data.status === 200) {
         this.loggedIn = false;
         sessionStorage.clear();

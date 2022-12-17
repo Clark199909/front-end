@@ -1,0 +1,10 @@
+{
+    "/api/*": {
+        "target": "https://127.0.0.1:5011",
+        "secure": false
+    },
+    "/logout": {
+        "target": "https://127.0.0.1:5011",
+        "secure": false
+    }
+}
